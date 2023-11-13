@@ -36,3 +36,29 @@ form.addEventListener("submit", add_item)
 
 }
 
+const filter = document.getElementById('filter');
+
+filter.addEventListener('keyup', filteritem);
+
+function filteritem(e)
+{
+    var text= document.getElementById('filter').value;
+    text.toLowerCase();
+    var lilist= document.getElementsByTagName('li');
+    let arr= Array.from(lilist);
+    for(let i=0;i<arr.length;i++){
+         var firstName=arr[i].textContent;
+         var lastName= arr[i].children[1].textContent
+        console.log(firstName,lastName)
+
+    if(firstName.toLowerCase().indexOf(text)!=-1 || lastName.toLowerCase().indexOf(text)!=-1)
+    {
+        arr[i].style.display="block";
+        console.log("x")
+    }
+    else{
+        arr[i].style.display="none";
+    }
+}
+}
+
