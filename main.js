@@ -30,5 +30,16 @@ function vaishali(event) {
         parent.removeChild(li)
         localStorage.removeItem("name")
     }
+    let editbutton = document.createElement('button')
+    editbutton.appendChild(document.createTextNode("Edit"))
+    li.appendChild(editbutton);
 
+    editbutton.onclick=()=>{
+        document.getElementById('name').value= obj.name
+        document.getElementById('email').value= obj.email
+        document.getElementById('phone').value= obj.phone
+        parent.removeChild(li)
+        localStorage.removeItem("name")
+
+    }
   }
