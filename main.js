@@ -15,7 +15,20 @@ function vaishali(event) {
         phone
     }
     localStorage.setItem("name", JSON.stringify(obj))
-  let a= JSON.parse(localStorage.getItem("name"));
-  console.log(a)
+    let a= JSON.parse(localStorage.getItem("name"));
+    console.log(a)
+    let li=document.createElement("li")
+    li.textContent=obj.name+ obj.email+ obj.phone
+    let parent= document.getElementById('item')
+    parent.appendChild(li)
+
+    let deletebutton = document.createElement('button')
+    deletebutton.appendChild(document.createTextNode("Delete"))
+    li.appendChild(deletebutton);
+    li.style.backgroundColor= 'red'
+    deletebutton.onclick=()=>{
+        parent.removeChild(li)
+        localStorage.removeItem("name")
+    }
 
   }
