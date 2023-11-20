@@ -1,45 +1,43 @@
-function vaishali(event) {
-    event.preventDefault();
-    var name = document.getElementById("name").value;
-    var email = document.getElementById("email").value;
-    var phone = document.getElementById("phone").value;
-    console.log(name, email, phone)
-    // localStorage.setItem("name", name)
-    // localStorage.setItem("email", email)
-    // localStorage.setItem("phone", phone)
-    // console.log(localStorage.getItem('name'))
-    // console.log(localStorage.getItem('email'));
+function addexpense(event){
+    event.preventDefault()
+    let price= document.getElementById('price').value 
+    let description= document.getElementById('description').value
+    let category= document.getElementById("category").value
     let obj= {
-        name,
-        email,
-        phone
+        price, description,category
     }
-    localStorage.setItem("name", JSON.stringify(obj))
-    let a= JSON.parse(localStorage.getItem("name"));
-    console.log(a)
-    let li=document.createElement("li")
-    li.textContent=obj.name+ obj.email+ obj.phone
-    let parent= document.getElementById('item')
-    parent.appendChild(li)
+    addToStorage(obj)
+}
 
-    let deletebutton = document.createElement('button')
-    deletebutton.appendChild(document.createTextNode("Delete"))
-    li.appendChild(deletebutton);
-    li.style.backgroundColor= 'red'
-    deletebutton.onclick=()=>{
-        parent.removeChild(li)
-        localStorage.removeItem("name")
+    function addToStorage(obj)
+    {
+          localStorage.setItem("expenseDeatils",JSON.stringify(obj))
+          let data= JSON.parse(localStorage.getItem("expenseDeatils"))
+          addExpenseToScreen(data)
     }
-    let editbutton = document.createElement('button')
-    editbutton.appendChild(document.createTextNode("Edit"))
-    li.appendChild(editbutton);
-
-    editbutton.onclick=()=>{
-        document.getElementById('name').value= obj.name
-        document.getElementById('email').value= obj.email
-        document.getElementById('phone').value= obj.phone
-        parent.removeChild(li)
-        localStorage.removeItem("name")
-
+    
+    function addExpenseToScreen(data){
+       let li = document.createElement('li')
+       li.textContent= data.price+data.description+data.category
+       let details= document.getElementById('details')
+       details.appendChild(li)
+       let editbtn = document.createElement('button')
+       editbtn.appendChild(document.createTextNode("Edit"))
+       let deletebtn = document.createElement('button')
+       deletebtn.appendChild(document.createTextNode("Delete"))
+       li.appendChild(editbtn)
+       li.appendChild(deletebtn)
+       editbtn.onclick= ()=>{
+        localStorage.removeItem("expenseDetails")
+        details.removeChild(li)
+         document.getElementById('price').value = data.price
+         document.getElementById('description').value = data.description
+         document.getElementById("category").value = data.category
+         
+       }
+       deletebtn.onclick=()=>{
+        localStorage.removeItem("expenseDetails")
+        details.removeChild(li)
+       }
+       
     }
-  }
