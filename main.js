@@ -45,5 +45,26 @@ function addusertoscreen(obj){
     listchild.appendChild(deletebtn)
     listchild.appendChild(document.createTextNode('  '))
     listchild.appendChild(editbtn)
-
+    deletebtn.onclick=()=>{
+        deleteuser(obj._id)
+    }
+   
 }
+async function deleteuser(id){
+       let parent=document.getElementById('item')
+       for(let i=0;i<parent.children.length;i++){
+            let child=parent.children[i]
+            if(child.textContent.includes(id))
+            {
+                parent.removeChild(child)
+            }
+       } 
+    try {
+        let res=await axios.delete(`https://crudcrud.com/api/15b0f1d958db4aafae1cfc47fae456d2/vaishali/${id}`)
+        console.log(res,"deleted")
+    } catch (error) {
+        console.log('error')
+    }
+}
+
+
