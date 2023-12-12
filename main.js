@@ -48,7 +48,10 @@ function addusertoscreen(obj){
     deletebtn.onclick=()=>{
         deleteuser(obj._id)
     }
-   
+
+    editbtn.onclick=()=>{
+        editUser(obj)
+    }
 }
 async function deleteuser(id){
        let parent=document.getElementById('item')
@@ -67,4 +70,10 @@ async function deleteuser(id){
     }
 }
 
+function editUser(obj){
+    document.getElementById("name").value=obj.name
+    document.getElementById("email").value=obj.mail
+    document.getElementById("phone").value=obj.number 
+    deleteuser(obj._id)
+}
 
